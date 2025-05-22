@@ -1,24 +1,20 @@
-
-import { Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Recipes from './components/Recipes';
+import Ingredients from './components/Ingredients';
+import AddRecipe from './components/AddRecipe';
 
 function App() {
   return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/recipes">Recipes</Link>
-          </li>
-          <li>
-            <Link to="/ingredients">Ingredients</Link>
-          </li>
-          <li>
-            <Link to="/insert">Insert</Link>
-          </li>
-        </ul>
-      </nav>
-    </>
+    <BrowserRouter>
+      <Navbar/>
+      <Routes>
+        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/ingredients" element={<Ingredients />} />
+        <Route path="/addRecipe" element={<AddRecipe />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
-export default App
+export default App;
