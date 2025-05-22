@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Recipes.css';
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -13,9 +15,9 @@ function Recipes() {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const json = await response.json(); //data has to be in the form of an array not an object.
-        console.log(json); // ← double-check here
-        setRecipes(json.food_recipes); //This line of code is where the name of the table from the database goes.
+        const json = await response.json();
+        console.log(json);
+        setRecipes(json.food_recipes); // Assumes food_recipes is an array
       } catch (error) {
         setError(error);
       } finally {
@@ -23,23 +25,44 @@ function Recipes() {
       }
     };
 
-    fetchRecipes(); //Calling the function inside of the useEffect method which will update the page automatically when a recipe is added
+    fetchRecipes();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  // Filter recipes by search term (case insensitive)
+  const filteredRecipes = recipes.filter((item) =>
+    item.food?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error?.message || 'Something went wrong!'}</p>;
 
-  if (!recipes || recipes.length === 0) return <p>No recipes found.</p>;
-
   return (
-    <ul>
-      {recipes.map(item => (
-        <li key={item.id || item.food} style={{ marginBottom: '1rem' }}>
-        <strong>{item.food}</strong> 
-      </li>
-      ))}
-    </ul>
+    <div className="recipes-container">
+      <h2>Browse Recipes</h2>
+
+      {/* 🔍 Search Bar */}
+      <input
+        type="text"
+        placeholder="Search for a recipe..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-bar"
+      />
+
+      {filteredRecipes.length === 0 ? (
+        <p>No recipes found.</p>
+      ) : (
+        <ul className="recipe-list">
+          {filteredRecipes.map((item) => (
+            <li key={item.id || item.food} className="recipe-item">
+              <Link to={`/ingredients/${item.id}`}>
+                <strong>{item.food}</strong>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

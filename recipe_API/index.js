@@ -12,6 +12,36 @@ app.get('/', (req, res)=>{
   res.send('recipes.db service is online')
 });
 
+app.get('/api/recipes/:id', (req, res) => {//NEW ID I AM WORKING
+  res.set('Content-Type', 'application/json');
+  const recipeId = req.params.id;
+  const sql = 'SELECT * FROM food_recipes WHERE id = ?';
+
+  try {
+    DB.get(sql, [recipeId], (err, row) => {
+      if (err) {
+        throw err;
+      }
+
+      if (!row) {
+        res.status(404).send(JSON.stringify({ code: 404, status: 'Recipe not found' }));
+        return;
+      }
+
+      const recipe = {
+        id: row.id,
+        food: row.food,
+        ingredients: row.ingredients
+      };
+
+      res.send(JSON.stringify(recipe));
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(JSON.stringify({ code: 500, status: err.message }));
+  }
+});
+
 
 app.get('/api', (req, res) => {
   res.set('content-type', 'application/json');
