@@ -55,7 +55,7 @@ function Recipes() {
         <ul className="recipe-list">
           {filteredRecipes.map((item) => (
             <li key={item.id || item.food} className="recipe-item">
-              <Link to={`/ingredients/${item.id}`}>
+              <Link to={`/recipes/${item.id}`}>
                 <strong>{item.food}</strong>
               </Link>
             </li>

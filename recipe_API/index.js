@@ -12,35 +12,28 @@ app.get('/', (req, res)=>{
   res.send('recipes.db service is online')
 });
 
-app.get('/api/recipes/:id', (req, res) => {//NEW ID I AM WORKING
+app.get('/api/:id', (req, res) => {
   res.set('Content-Type', 'application/json');
   const recipeId = req.params.id;
   const sql = 'SELECT * FROM food_recipes WHERE id = ?';
-
-  try {
-    DB.get(sql, [recipeId], (err, row) => {
-      if (err) {
+  let data = {food_recipes: []};
+  try{
+    DB.get(sql, [recipeId], (err, rows)=>{
+      if(err){
         throw err;
       }
-
-      if (!row) {
-        res.status(404).send(JSON.stringify({ code: 404, status: 'Recipe not found' }));
-        return;
-      }
-
-      const recipe = {
-        id: row.id,
-        food: row.food,
-        ingredients: row.ingredients
-      };
-
-      res.send(JSON.stringify(recipe));
+      data.food_recipes.push({id: rows.id, food: rows.food, ingredients: rows.ingredients});
+      let content = JSON.stringify(data);
+      res.send(content);
     });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(JSON.stringify({ code: 500, status: err.message }));
+  }
+  catch(err){
+    console.log(err.message);
+    res.status(467);
+    res.send(`{"code":467, "status":"${err.message}"}`);
   }
 });
+
 
 
 app.get('/api', (req, res) => {
