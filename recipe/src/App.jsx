@@ -3,7 +3,8 @@ import Navbar from './components/Navbar';
 import Recipes from './components/Recipes';
 import Ingredients from './components/Ingredients';
 import AddRecipe from './components/AddRecipe';
-import Recipe_Ingrediens from './components/Recipe_Ingredient';
+import Recipe_Ingredient from './components/Recipe_Ingredient';
+import EditRecipe from './components/EditRecipe';
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/recipes" element={<Recipes />} />
-        <Route path="/recipes/:id" element={<Recipe_Ingrediens />} />
+        <Route path="/recipes/:id" element={<Recipe_Ingredient />} />
         <Route path="/ingredients" element={<Ingredients />} />
         <Route path="/addRecipe" element={<AddRecipe />} />
+        <Route path="/edit/:id" element={<EditRecipe />} />
       </Routes>
     </BrowserRouter>
   )

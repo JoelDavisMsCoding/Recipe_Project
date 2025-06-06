@@ -34,9 +34,9 @@ function Recipes() {
   return (
     <ul>
       {recipes.map(item => (
-        <li key={item.id || item.food} style={{ marginBottom: '1rem' }}>
-        <strong>{item.food}</strong> 
-        <p>Ingredients: {item.ingredients}</p>
+        <li key={item.id || item.food} style={{ marginBottom: '1rem' }} className="ingredientPgeLi">
+        <strong className="foodTitle">{item.food}</strong> 
+        <p><span className="ingredientTitle">Ingredients:</span> {item.ingredients}</p>
       </li>
       ))}
     </ul>

@@ -12,7 +12,7 @@ app.get('/', (req, res)=>{
   res.send('recipes.db service is online')
 });
 
-app.get('/api/:id', (req, res) => {
+app.get('/api/:id', (req, res) => { //Get a single recipe using the ID
   res.set('Content-Type', 'application/json');
   const recipeId = req.params.id;
   const sql = 'SELECT * FROM food_recipes WHERE id = ?';
@@ -34,9 +34,7 @@ app.get('/api/:id', (req, res) => {
   }
 });
 
-
-
-app.get('/api', (req, res) => {
+app.get('/api', (req, res) => { //Get all the recipes so no Request is needed.
   res.set('content-type', 'application/json');
   const sql = 'SELECT * FROM food_recipes';
   let data = {food_recipes: []};
@@ -82,7 +80,7 @@ app.post('/api', (req, res) => {
   }
 });
 
-app.put('/api/:id', (req, res) => {
+app.put('/api/:id', (req, res) => { //This is how updates are handled.
   res.set('content-type', 'application/json');
   const sql = 'UPDATE food_recipes SET food = ?, ingredients = ? WHERE id = ?';
   try{
@@ -106,13 +104,13 @@ app.put('/api/:id', (req, res) => {
 
 app.delete('/api/:id', (req, res) => {
   res.set('content-type', 'application/json');
-  const sql = 'DELETE FROM food_recipes WHERE id=?';
+  const sql = 'DELETE FROM food_recipes WHERE id = ?';
   try{
-    DB.run(sql, [req.query.id], function(err){
+    DB.run(sql, [req.params.id], function(err){
       if(err) throw err;
       if(this.changes === 1){//If one item was deleted run this
         res.status(200);
-        res.send(`{"message": "Recipe ${req.query.id} was removed from the list"}`);
+        res.send(`{"message": "Recipe ${req.params.id} was removed from the list"}`);
       }
       else {
         res.status(200);
