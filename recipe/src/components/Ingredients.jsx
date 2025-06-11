@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -35,7 +36,7 @@ function Recipes() {
     <ul>
       {recipes.map(item => (
         <li key={item.id || item.food} style={{ marginBottom: '1rem' }} className="ingredientPgeLi">
-        <strong className="foodTitle">{item.food}</strong> 
+        <Link to={`/recipes/${item.id}`}> <strong className="foodTitle">{item.food}</strong> </Link>
         <p><span className="ingredientTitle">Ingredients:</span> {item.ingredients}</p>
       </li>
       ))}

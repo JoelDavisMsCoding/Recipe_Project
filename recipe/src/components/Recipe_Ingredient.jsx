@@ -63,9 +63,9 @@ function Recipe_Ingredient() {
     <div className="container">
       <div className="col-12 col1">
       <Link to="/recipes">← Back to Recipes</Link>
-      <h5 className="recipe-item">{recipe.food}</h5>
-      <h5>Ingredients:</h5>
-      <p>{recipe.ingredients}</p>
+      <h4 className="recipe-ingredient">{recipe.food}</h4>
+      <h5 className='d-inline'>Ingredients: </h5>
+      <p className='d-inline'>{recipe.ingredients}</p>
       {/* <ul>
         {ingredients.map((ingredient, index) => (
           <li key={index}>{ingredient}</li>
@@ -81,5 +81,4 @@ function Recipe_Ingredient() {
     </div>  
   );
 }
-
 export default Recipe_Ingredient;
