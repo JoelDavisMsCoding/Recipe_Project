@@ -13,6 +13,12 @@
   border: 1px solid #ccc;
 }
 
+.custom-alert {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  padding: 1rem;
+}
+
 .col1{
   background-color: #f2f2f2;
   padding: 1rem;
@@ -61,7 +67,11 @@ a {text-decoration: none;}
 .ingredientTitle{
   color:black;
   font-size: large;
-  font-weight: bold;
+}
+
+.instructionTitle{
+  color:black;
+  font-size: large;
 }
 
 span{

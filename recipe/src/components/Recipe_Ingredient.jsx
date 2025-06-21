@@ -27,8 +27,11 @@ function Recipe_Ingredient() {
     fetchRecipe();
   }, [id]);
 
-  if (loading) return <p>Loading recipe...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading)
+    return <div className="alert alert-info text-center">Loading recipe...</div>;
+
+  if (error)
+    return <div className="alert alert-danger text-center">Error: {error.message}</div>;
 
   const ingredients = recipe.ingredients.split(',').map(i => i.trim()); //This takes string of ingrdients adding them to an array.
 
@@ -64,14 +67,25 @@ function Recipe_Ingredient() {
       <div className="col-12 col1">
       <Link to="/recipes">← Back to Recipes</Link>
       <h4 className="recipe-ingredient">{recipe.food}</h4>
-      <h5 className='d-inline'>Ingredients: </h5>
-      <p className='d-inline'>{recipe.ingredients}</p>
+      <p><span className="ingredientTitle">Ingredients:</span> {recipe.ingredients}</p>
       {/* <ul>
         {ingredients.map((ingredient, index) => (
           <li key={index}>{ingredient}</li>
         ))}
       </ul> */}
+      <p><span className="instructionTitle">Instructions:</span> {recipe.instructions}</p>
+
+      {recipe.image_url && (
+        <div className="my-3">
+          <img
+            src={recipe.image_url}
+            alt={recipe.food}
+            style={{ maxWidth: '300px', borderRadius: '10px' }}
+          />
+        </div>
+      )}
       </div>
+
       <div className="col-12 col2">
       <button onClick={handleDelete} className="btn deleteBttn">
         Delete Recipe

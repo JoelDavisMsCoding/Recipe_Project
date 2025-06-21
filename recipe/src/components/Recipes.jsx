@@ -33,8 +33,11 @@ function Recipes() {
     item.food?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error?.message || 'Something went wrong!'}</p>;
+  if (loading)
+    return <div className="alert alert-info text-center">Loading recipe...</div>;
+
+  if (error)
+    return <div className="alert alert-danger text-center">Error: {error.message}</div>;
 
   return (
     <div className="recipes-container">
@@ -54,7 +57,7 @@ function Recipes() {
       ) : (
         <ul className="recipe-list">
           {filteredRecipes.map((item) => (
-            <li key={item.id || item.food} className="recipe-item">
+            <li key={item.id} className="recipe-item">
               <Link to={`/recipes/${item.id}`}>
                 <strong>{item.food}</strong>
               </Link>

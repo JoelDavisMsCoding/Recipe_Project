@@ -26,18 +26,22 @@ function Recipes() {
     fetchRecipes(); //Calling the function inside of the useEffect method which will update the page automatically when a recipe is added
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return <div className="alert alert-info text-center">Loading recipe...</div>;
 
-  if (error) return <p>Error: {error?.message || 'Something went wrong!'}</p>;
+  if (error)
+    return <div className="alert alert-danger text-center">Error: {error.message}</div>;
 
   if (!recipes || recipes.length === 0) return <p>No recipes found.</p>;
 
   return (
     <ul>
       {recipes.map(item => (
-        <li key={item.id || item.food} style={{ marginBottom: '1rem' }} className="ingredientPgeLi">
+        <li key={item.id} style={{ marginBottom: '1rem' }} className="ingredientPgeLi">
         <Link to={`/recipes/${item.id}`}> <strong className="foodTitle">{item.food}</strong> </Link>
         <p><span className="ingredientTitle">Ingredients:</span> {item.ingredients}</p>
+        <p><span className="instructionTitle">Instructions:</span> {item.instructions}</p>
+        {item.image_url && <img src={item.image_url} alt={item.food} style={{ maxWidth: '200px', borderRadius: '10px' }} />}
       </li>
       ))}
     </ul>

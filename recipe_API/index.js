@@ -22,7 +22,13 @@ app.get('/api/:id', (req, res) => { //Get a single recipe using the ID
       if(err){
         throw err;
       }
-      data.food_recipes.push({id: rows.id, food: rows.food, ingredients: rows.ingredients});
+      data.food_recipes.push({
+        id: rows.id,
+        food: rows.food,
+        ingredients: rows.ingredients,
+        instructions: rows.instructions,
+        image_url: rows.image_url
+      });
       let content = JSON.stringify(data);
       res.send(content);
     });
@@ -44,7 +50,13 @@ app.get('/api', (req, res) => { //Get all the recipes so no Request is needed.
         throw err;
       }
       rows.forEach(row=>{
-        data.food_recipes.push({id: row.id, food: row.food, ingredients: row.ingredients});
+        data.food_recipes.push({
+          id: row.id,
+          food: row.food,
+          ingredients: row.ingredients,
+          instructions: row.instructions,
+          image_url: row.image_url
+        });
       });
       let content = JSON.stringify(data);
       res.send(content);
@@ -61,10 +73,10 @@ app.post('/api', (req, res) => {
   console.log(req.body);
 
   res.set('content-type', 'application/json');
-  const sql = 'INSERT INTO food_recipes(food, ingredients) VALUES(? , ?)';
+  const sql = 'INSERT INTO food_recipes(food, ingredients, instructions, image_url) VALUES(?, ?, ?, ?)';
   let newId;
   try{
-    DB.run(sql, [req.body.food, req.body.ingredients], function(err){
+    DB.run(sql, [req.body.food, req.body.ingredients, req.body.instructions, req.body.image_url], function(err){
       if(err) throw err;
       newId = this.lastID; //provided the auto increment integer id
       res.status(201);
@@ -75,23 +87,23 @@ app.post('/api', (req, res) => {
   }
   catch(err){
     console.log(err.message);
-    res.status(468);
-    res.send(`{"code":468, "status":"${err.message}"}`);
+    res.status(500);
+    res.send(`{"code":500, "status":"${err.message}"}`);
   }
 });
 
 app.put('/api/:id', (req, res) => { //This is how updates are handled.
   res.set('content-type', 'application/json');
-  const sql = 'UPDATE food_recipes SET food = ?, ingredients = ? WHERE id = ?';
+  const sql = 'UPDATE food_recipes SET food = ?, ingredients = ?, instructions = ?, image_url = ? WHERE id = ?';
   try{
-    DB.run(sql, [req.body.food, req.body.ingredients, req.query.id], function(err){
+    DB.run(sql, [req.body.food, req.body.ingredients, req.instructions, req.image_url, req.query.id], function(err){
       if(err) throw err;
       if(this.changes === 1){//If one item was deleted run this
         res.status(200);
         res.send(`{"message": "Recipe ${req.query.id} was updated"}`);
       }
       else {
-        res.status(200);
+        res.status(400);
         res.send(`{"message": "No matching id for this request. No data was updated."}`);
       }
     })
@@ -119,8 +131,8 @@ app.delete('/api/:id', (req, res) => {
     })
   }catch(err){
     console.log(err.message);
-    res.status(467);
-    res.send(`{"code":467, "status":"${err.message}"}`);
+    res.status(500);
+    res.send(`{"code":500, "status":"${err.message}"}`);
   }
 });
 

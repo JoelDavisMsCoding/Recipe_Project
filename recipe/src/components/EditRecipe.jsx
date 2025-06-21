@@ -3,7 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 
 function EditRecipe() {
   const { id } = useParams();
-  const [formData, setFormData] = useState({ food: '', ingredients: '' });
+  const [formData, setFormData] = useState({
+    food: '',
+    ingredients: '',
+    instructions: '',
+    image_url:''
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,7 +20,12 @@ function EditRecipe() {
         if (!res.ok) throw new Error('Recipe not found');
         const data = await res.json();
         const recipe = data.food_recipes[0];
-        setFormData({ food: recipe.food, ingredients: recipe.ingredients });
+        setFormData({
+          food: recipe.food,
+          ingredients: recipe.ingredients,
+          instructions: recipe.instructions,
+          image_url: recipe.image_url
+        });
       } catch (err) {
         setError(err.message);
       } finally {
@@ -50,8 +60,11 @@ function EditRecipe() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading)
+    return <div className="alert alert-info text-center">Loading recipe...</div>;
+
+  if (error)
+    return <div className="alert alert-danger text-center">Error: {error.message}</div>;
 
   return (
   <div className="edit-recipe-container">
@@ -69,6 +82,7 @@ function EditRecipe() {
           className="form-input"
         />
       </div>
+
       <div className="form-group">
         <label>Ingredients (comma separated):</label>
         <textarea
@@ -79,6 +93,29 @@ function EditRecipe() {
           className="form-textarea"
         />
       </div>
+
+      <div className="form-group">
+        <label>Instructions:</label>
+        <textarea
+          name="instructions"
+          value={formData.instructions}
+          onChange={handleChange}
+          required
+          className="form-textarea"
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Image_url:</label>
+        <input
+          type="url"
+          className="form-control"
+          value={formData.image_url}
+          onChange={(e) => setImage_url(e.target.value)}
+          placeholder="https://example.com/image.jpg"
+        />
+      </div>
+
       <button type="submit" className="form-button">Update Recipe</button>
     </form>
 </div>

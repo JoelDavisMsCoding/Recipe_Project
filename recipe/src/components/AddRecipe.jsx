@@ -5,6 +5,8 @@ import axios from 'axios';
 function AddRecipe() {
   const [food, setFood] = useState('');
   const [ingredients, setIngredients] = useState('');
+  const [instructions, setInstructions] = useState('');
+  const [image_url, setImage_url] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -14,6 +16,8 @@ function AddRecipe() {
       await axios.post('http://localhost:3000/api', {
         food,
         ingredients,
+        instructions,
+        image_url
       });
 
       // Redirect to homepage after successful post
@@ -38,13 +42,35 @@ function AddRecipe() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Ingredients</label>
+          <label className="form-label">Ingredients (comma separated)</label>
           <textarea
             className="form-control"
             rows="3"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Instructions</label>
+          <textarea
+            className="form-control"
+            rows="3"
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Image_url</label>
+          <input
+            type="url"
+            className="form-control"
+            value={image_url}
+            onChange={(e) => setImage_url(e.target.value)}
+            placeholder="https://example.com/image.jpg"
           />
         </div>
 
