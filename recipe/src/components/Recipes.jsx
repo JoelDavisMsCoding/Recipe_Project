@@ -41,7 +41,7 @@ function Recipes() {
 
   return (
     <div className="recipes-container">
-      <h2>Browse Recipes</h2>
+      <h2 className="browseRecipes text-center">Browse Recipes</h2>
 
       {/* 🔍 Search Bar */}
       <input

@@ -30,8 +30,14 @@
   padding-top: 1rem;
 }
 
-.btn-success{
-  background-color: blue;
+.submit-Btn{
+  background-color: #4caf50;
+  color:#f2f2f2;
+}
+
+.submit-Btn:hover {
+  background-color: darkgreen;
+  color:#f2f2f2;
 }
 
 .form-label{
@@ -50,14 +56,15 @@
   margin-bottom: 0.5rem;
 }
 
-
 .ingredientsNav {padding-right: 20px; padding-left: 20px;}
+
 .ctNav{
   margin-top: 20px;
   margin-bottom: 40px;
   text-decoration: none;
   font-size:larger;
 }
+
 a {text-decoration: none;}
 
 .foodTitle{
@@ -86,9 +93,6 @@ ul {list-style-type: none;}
   border-radius: 5px;
 }
 
-.mb-4 {
-  color: blue;
-}
 
 .deleteBttn {
   background-color: red;
@@ -119,6 +123,20 @@ ul {list-style-type: none;}
   background-color: darkgreen;
 }
 
+.add-recipe-container{
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.add-recipe-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
 .edit-recipe-container {
   max-width: 600px;
   margin: 0 auto;
@@ -136,12 +154,6 @@ ul {list-style-type: none;}
 
 .edit-recipe-form .form-group {
   margin-bottom: 1rem;
-}
-
-.edit-recipe-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
 }
 
 .form-input,
@@ -174,4 +186,40 @@ ul {list-style-type: none;}
 
 .form-button:hover {
   background-color: darkgreen;
+  color:#f2f2f2;
 }
+
+/*Tablet*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  .recipes-container,
+  .add-recipe-container,
+  .edit-recipe-container {
+    max-width: 90%;
+    padding: 2rem;
+  }
+
+  .recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .recipe-item,
+  .ingredientPgeLi {
+    flex: 0 0 48%;
+    margin-bottom: 1rem;
+  }
+
+  .search-bar {
+    max-width: 400px;
+    margin: 0 auto 1rem;
+    font-size: 1rem;
+  }
+
+  .form-button {
+    width: auto;
+    padding: 0.75rem 2rem;
+  }
+}
+

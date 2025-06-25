@@ -65,7 +65,6 @@ function Recipe_Ingredient() {
   return (
     <div className="container">
       <div className="col-12 col1">
-      <Link to="/recipes">← Back to Recipes</Link>
       <h4 className="recipe-ingredient">{recipe.food}</h4>
       <p><span className="ingredientTitle">Ingredients:</span> {recipe.ingredients}</p>
       {/* <ul>

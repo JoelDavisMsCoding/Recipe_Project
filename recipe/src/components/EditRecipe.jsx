@@ -70,9 +70,10 @@ function EditRecipe() {
   <div className="edit-recipe-container">
     <Link to={`/recipes/${id}`}>← Back to Recipes</Link>
     <h2 className="edit-recipe-title">Edit Recipe</h2>
+
     <form onSubmit={handleSubmit} className="edit-recipe-form">
       <div className="form-group">
-        <label>Recipe Name:</label>
+        <label className="form-label">Recipe Name</label>
         <input
           type="text"
           name="food"
@@ -84,7 +85,7 @@ function EditRecipe() {
       </div>
 
       <div className="form-group">
-        <label>Ingredients (comma separated):</label>
+        <label className="form-label">Ingredients (comma separated)</label>
         <textarea
           name="ingredients"
           value={formData.ingredients}
@@ -95,7 +96,7 @@ function EditRecipe() {
       </div>
 
       <div className="form-group">
-        <label>Instructions:</label>
+        <label className="form-label">Instructions</label>
         <textarea
           name="instructions"
           value={formData.instructions}
@@ -106,12 +107,13 @@ function EditRecipe() {
       </div>
 
       <div className="form-group">
-        <label>Image_url:</label>
+        <label className="form-label">Image_url</label>
         <input
           type="url"
+          name="image_url"
           className="form-control"
           value={formData.image_url}
-          onChange={(e) => setImage_url(e.target.value)}
+          onChange={handleChange}
           placeholder="https://example.com/image.jpg"
         />
       </div>

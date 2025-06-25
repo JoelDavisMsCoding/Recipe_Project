@@ -78,9 +78,16 @@ app.post('/api', (req, res) => {
   try{
     DB.run(sql, [req.body.food, req.body.ingredients, req.body.instructions, req.body.image_url], function(err){
       if(err) throw err;
+
       newId = this.lastID; //provided the auto increment integer id
       res.status(201);
-      let data = {status: 201, message: `Recipe ${newId} saved.`}
+
+      let data = {
+        status: 201,
+        id: newId,
+        message: `Recipe ${newId} saved.`
+      };
+      
       let content = JSON.stringify(data);
       res.send (content);
     })
@@ -96,11 +103,11 @@ app.put('/api/:id', (req, res) => { //This is how updates are handled.
   res.set('content-type', 'application/json');
   const sql = 'UPDATE food_recipes SET food = ?, ingredients = ?, instructions = ?, image_url = ? WHERE id = ?';
   try{
-    DB.run(sql, [req.body.food, req.body.ingredients, req.instructions, req.image_url, req.query.id], function(err){
+    DB.run(sql, [req.body.food, req.body.ingredients, req.body.instructions, req.body.image_url, req.params.id], function(err){
       if(err) throw err;
       if(this.changes === 1){//If one item was deleted run this
         res.status(200);
-        res.send(`{"message": "Recipe ${req.query.id} was updated"}`);
+        res.send(`{"message": "Recipe ${req.params.id} was updated"}`);
       }
       else {
         res.status(400);

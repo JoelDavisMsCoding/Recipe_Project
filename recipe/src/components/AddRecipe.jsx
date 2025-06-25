@@ -13,26 +13,30 @@ function AddRecipe() {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:3000/api', {
+      const response = await axios.post('http://localhost:3000/api', {
         food,
         ingredients,
         instructions,
         image_url
       });
 
-      // Redirect to homepage after successful post
-      navigate('/');
+      //Get new recipe ID from response
+      const newRecipeId = response.data.id; //
+      console.log(response);
+      console.log(response.data);
+      //Redirect to homepage after successful post
+      navigate(`/recipes/${newRecipeId}`);
     } catch (error) {
       console.error('Error adding recipe:', error.response || error.message);
     }
   };
 
   return (
-    <div className="container">
-      <h2 className="mb-4">Add New Recipe</h2>
+    <div className="add-recipe-container">
+      <h2 className="add-recipe-title">Add New Recipe</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Food</label>
+          <label className="form-label">Recipe Name </label>
           <input
             className="form-control"
             value={food}
@@ -74,7 +78,7 @@ function AddRecipe() {
           />
         </div>
 
-        <button type="submit" className="btn btn-success">Submit Recipe</button>
+        <button type="submit" className="btn submit-Btn">Submit Recipe</button>
       </form>
     </div>
   );
