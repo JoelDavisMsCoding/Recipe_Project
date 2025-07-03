@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Recipes from './components/Recipes';
 import Ingredients from './components/Ingredients';
@@ -8,9 +8,10 @@ import EditRecipe from './components/EditRecipe';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Recipe_Project">
       <Navbar/>
       <Routes>
+        <Route path="/" element={<Navigate to="/recipes" />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/recipes/:id" element={<Recipe_Ingredient />} />
         <Route path="/ingredients" element={<Ingredients />} />
