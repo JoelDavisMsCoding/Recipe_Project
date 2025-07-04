@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Recipes from './components/Recipes';
 import Ingredients from './components/Ingredients';
@@ -8,7 +8,7 @@ import EditRecipe from './components/EditRecipe';
 
 function App() {
   return (
-    <BrowserRouter basename="/Recipe_Project">
+    <Router>
       <Navbar/>
       <Routes>
         <Route path="/" element={<Navigate to="/recipes" />} />
@@ -18,7 +18,7 @@ function App() {
         <Route path="/addRecipe" element={<AddRecipe />} />
         <Route path="/edit/:id" element={<EditRecipe />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 
