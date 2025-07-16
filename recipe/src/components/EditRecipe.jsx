@@ -16,7 +16,7 @@ function EditRecipe() {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/${id}`);
         if (!res.ok) throw new Error('Recipe not found');
         const data = await res.json();
         const recipe = data.food_recipes[0];
@@ -44,7 +44,7 @@ function EditRecipe() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:3000/api/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

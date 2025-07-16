@@ -41,7 +41,7 @@ function Recipe_Ingredient() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/${id}`, {
         method: 'DELETE',
       });
 
