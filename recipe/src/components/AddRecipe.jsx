@@ -13,12 +13,13 @@ function AddRecipe() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}`, {
         food,
         ingredients,
         instructions,
         image_url
       });
+      
 
       //Get new recipe ID from response
       const newRecipeId = response.data.id; //
