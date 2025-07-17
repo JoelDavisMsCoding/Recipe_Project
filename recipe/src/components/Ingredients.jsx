@@ -14,7 +14,6 @@ function Recipes() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const json = await response.json(); //data has to be in the form of an array not an object.
-        console.log(json); // ← double-check here
         setRecipes(json.food_recipes); //This line of code is where the name of the table from the database goes.
       } catch (error) {
         setError(error);

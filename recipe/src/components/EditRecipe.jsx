@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 function EditRecipe() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     food: '',
     ingredients: '',
@@ -53,7 +54,8 @@ function EditRecipe() {
       if (!res.ok) throw new Error('Update failed');
       const result = await res.json();
       alert(result.message);
-      window.location.href = `/recipes/${id}`; // Redirect to updated recipe
+      navigate(`/recipes/${id}`);
+      
     } catch (err) {
       alert('Error updating recipe.');
       console.error(err);

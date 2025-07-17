@@ -22,9 +22,7 @@ function AddRecipe() {
       
 
       //Get new recipe ID from response
-      const newRecipeId = response.data.id; //
-      console.log(response);
-      console.log(response.data);
+      const newRecipeId = response.data.id;
       //Redirect to homepage after successful post
       navigate(`/recipes/${newRecipeId}`);
     } catch (error) {

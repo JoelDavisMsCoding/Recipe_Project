@@ -16,7 +16,6 @@ function Recipes() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const json = await response.json();
-        console.log(json);
         setRecipes(json.food_recipes); // Assumes food_recipes is an array
       } catch (error) {
         setError(error);
