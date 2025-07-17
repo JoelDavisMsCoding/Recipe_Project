@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 function Recipe_Ingredient() {
   const { id } = useParams(); // Get recipe ID from URL
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,7 +55,7 @@ function Recipe_Ingredient() {
 
       // Redirect back to recipe list after deletion
       window.alert(result.message);
-      window.location.href = '/recipes'; // or use `navigate()` from react-router
+      navigate('/recipes');
     }
     catch (err) {
       console.error('Error:', err);
