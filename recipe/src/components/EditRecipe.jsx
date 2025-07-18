@@ -76,23 +76,23 @@ function EditRecipe() {
       <div className="form-group">
         <label className="form-label">Recipe Name</label>
         <input
+          className="form-control"
           type="text"
           name="food"
           value={formData.food}
           onChange={handleChange}
           required
-          className="form-input"
         />
       </div>
 
       <div className="form-group">
         <label className="form-label">Ingredients (comma separated)</label>
         <textarea
+          className="form-control"
           name="ingredients"
           value={formData.ingredients}
           onChange={handleChange}
           required
-          className="form-textarea"
         />
       </div>
 
