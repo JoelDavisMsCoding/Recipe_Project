@@ -72,7 +72,6 @@ function EditRecipe() {
   <div className="edit-recipe-container">
     <Link to={`/recipes/${id}`}>← Back to Recipes</Link>
     <h2 className="edit-recipe-title">Edit Recipe</h2>
-
     <form onSubmit={handleSubmit} className="edit-recipe-form">
       <div className="form-group">
         <label className="form-label">Recipe Name</label>
@@ -100,11 +99,11 @@ function EditRecipe() {
       <div className="form-group">
         <label className="form-label">Instructions</label>
         <textarea
+          className="form-control"
           name="instructions"
           value={formData.instructions}
           onChange={handleChange}
           required
-          className="form-textarea"
         />
       </div>
 
