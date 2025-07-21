@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Recipes.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; //needed for slide show
+import { Carousel } from 'react-responsive-carousel'; //needed for slide show
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -40,8 +42,58 @@ function Recipes() {
 
   return (
     <div className="recipes-container">
-      <h2 className="browseRecipes text-center">Browse Recipes</h2>
 
+      {/* Slide Show */}
+      <div className="mb-4">
+        <Carousel
+          autoPlay
+          infiniteLoop
+          interval={4000}
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={true}
+          stopOnHover={false}
+        >
+          <div>
+            <img
+              src="https://assets.unileversolutions.com/recipes-v3/74544-default.jpg?im=AspectCrop=(700,394);Resize=(700,394)"
+              alt="Chicken Alfredo"
+            />
+          </div>
+          <div>
+            <img
+              src="https://assets.unileversolutions.com/recipes-v3/109338-default.jpg?im=AspectCrop=(497,280);Resize=(497,280)"
+              alt="Mediterranean Chicken"
+            />
+          </div>
+          <div>
+            <img
+              src="https://assets.unileversolutions.com/recipes-v3/100664-default.jpg?im=AspectCrop=(700,394);Resize=(700,394)"
+              alt="Pasta Asald"
+            />
+          </div>
+          <div>
+            <img
+              src="https://assets.unileversolutions.com/recipes-v3/70498-default.jpg?im=AspectCrop=(497,280);Resize=(497,280)"
+              alt="Peach Cobbler"
+            />
+          </div>
+          <div>
+            <img
+              src="https://assets.unileversolutions.com/recipes-v3/109364-default.png?im=AspectCrop=(700,394);Resize=(700,394)"
+              alt="Banana Bread"
+            />
+          </div>
+          <div>
+            <img
+              src="https://assets.unileversolutions.com/recipes-v3/189316-default.jpg?im=AspectCrop=(700,394);Resize=(700,394)"
+              alt="Lasagna"
+            />
+          </div>
+        </Carousel>
+      </div>
+
+      <h2 className="browseRecipes text-center">Browse Recipes</h2>
       {/* 🔍 Search Bar */}
       <input
         type="text"
